@@ -1,7 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import { PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+const initialOptions = {
+  clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? "",
+  currency: "USD",
+  intent: "subscription",
+  vault: true,
+} as const;
 
 interface PayPalSubscribeButtonProps {
   onSuccess?: () => void;
@@ -9,21 +16,25 @@ interface PayPalSubscribeButtonProps {
 
 export default function PayPalSubscribeButton({ onSuccess }: PayPalSubscribeButtonProps) {
   return (
-    <PayPalButtons
-      createSubscription={(data, actions) => {
-        return actions.subscription.create({
-          'plan_id': process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID as string // Pro Plan ID
-        });
-      }}
-      style={{
-        label: 'subscribe',
-        color: 'blue'
-      }}
-      onApprove={(data, actions) => {
-        console.log('Subscription approved:', data.subscriptionID);
-        onSuccess?.();
-        return Promise.resolve();
-      }}
-    />
+    <PayPalScriptProvider options={initialOptions}>
+      <PayPalButtons 
+        style={{
+          layout: 'vertical',
+          color: 'blue',
+          shape: 'rect',
+          label: 'subscribe'
+        }}
+        createSubscription={(data, actions) => {
+          return actions.subscription.create({
+            'plan_id': process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID ?? ""
+          });
+        }}
+        onApprove={async (data) => {
+          console.log('Subscription successful!', data.subscriptionID);
+          onSuccess?.();
+          return Promise.resolve();
+        }}
+      />
+    </PayPalScriptProvider>
   );
 }
