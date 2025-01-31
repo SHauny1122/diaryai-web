@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-8 md:p-24">
       <div className="text-center max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">DiaryAI</h1>
+        <h1 className="text-5xl font-bold text-[#4F46E5] mb-4">DiaryAI</h1>
         <p className="text-xl text-gray-600 mb-8">
           Transform your thoughts into text instantly. Speak naturally, and watch your words come to life.
         </p>
         <Link 
           href="/record" 
-          className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center px-6 py-3 rounded-full bg-[#4F46E5] text-white font-medium hover:bg-[#4338CA] transition-colors"
         >
           Start Recording
         </Link>
