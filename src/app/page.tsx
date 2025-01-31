@@ -7,6 +7,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-8 md:p-24">
       <div className="text-center max-w-3xl mx-auto">
+        {/* Test div to verify Tailwind */}
+        <div className="bg-red-500 p-4 mb-4">Test Tailwind</div>
+        
         <h1 className="text-5xl font-bold text-[#4F46E5] mb-4">DiaryAI</h1>
         <p className="text-xl text-gray-600 mb-8">
           Transform your thoughts into text instantly. Speak naturally, and watch your words come to life.
